@@ -1,6 +1,6 @@
 {
   "name": "gendiff_glif",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "learning project number two",
   "bin": {
     "gendiff": "dist/bin/gendiff.js"
@@ -27,5 +27,8 @@
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-babel": "^5.2.0",
     "eslint-plugin-import": "^2.14.0"
+  },
+  "dependencies": {
+    "commander": "^2.18.0"
   }
 }
