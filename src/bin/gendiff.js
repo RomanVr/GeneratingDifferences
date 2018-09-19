@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import program from 'commander';
-import gendiff from '../gendiffFunction';
+import gendiff from '..';
 
 program
-  .version('1.1.0')
+  .version('1.2.1')
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --formate [type]', 'Output format')
   .arguments('<firstConfig> <secondConfig>')
@@ -12,5 +12,3 @@ program
   });
 
 program.parse(process.argv);
-
-export default gendiff;
