@@ -1,6 +1,6 @@
 {
   "name": "gendiff_glif",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "learning project number two",
   "main": "dist/index.js",
   "bin": {
