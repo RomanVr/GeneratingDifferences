@@ -7,11 +7,11 @@ start1:
 start2:
 		npm run babel-node -- src/bin/gendiff.js before.yml after.yml
 
-start3:
+startBroken:
 		npm run babel-node -- src/bin/gendiff.js beforeBroken.yml after.yml
 
-start4:
-		npm run babel-node -- src/bin/gendiff.js beforeBroken.yml after1.yml
+start3:
+		npm run babel-node -- src/bin/gendiff.js before.ini after.ini
 
 lint:
 		npm run eslint .
