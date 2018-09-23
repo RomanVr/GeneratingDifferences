@@ -4,6 +4,15 @@ install:
 start1:
 		npm run babel-node -- src/bin/gendiff.js before.json after.json
 
+starttree:
+		npm run babel-node -- src/bin/gendiff.js beforeTree.json afterTree.json
+
+starttree1:
+		npm run babel-node -- src/bin/gendiff.js beforeTree.yml afterTree.yml
+
+starttree2:
+		npm run babel-node -- src/bin/gendiff.js beforeTree.ini afterTree.ini
+
 start2:
 		npm run babel-node -- src/bin/gendiff.js before.yml after.yml
 
