@@ -7,6 +7,6 @@ const mappingToParse = {
   ini: ini.parse,
 };
 
-const parse = (extenstionFile, data) => mappingToParse[extenstionFile](data);
+const parse = (typeData, data) => mappingToParse[typeData](data);
 
 export default parse;
