@@ -3,7 +3,7 @@ import program from 'commander';
 import gendiff from '..';
 
 program
-  .version('1.3.0')
+  .version('1.3.1')
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --formate [type]', 'Output format')
   .arguments('<firstConfig> <secondConfig>')

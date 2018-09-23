@@ -1,29 +1,25 @@
 import _ from 'lodash';
 import fs from 'fs';
+import path from 'path';
 import parse from './parsers';
 
-const getExtentionFile = (strPath) => {
-  const pathToStrArray = strPath.split('.');
-  return pathToStrArray[pathToStrArray.length - 1];
-};
-
-const gendiffFunction = (pathToFile1, pathToFile2) => {
-  const fileBefore = fs.readFileSync(pathToFile1, 'utf8');
-  const fileAfter = fs.readFileSync(pathToFile2, 'utf8');
-  const extentionFileBefore = getExtentionFile(pathToFile1);
-  const extentionFileAfter = getExtentionFile(pathToFile2);
-  const beforeObj = parse({ extentionFile: extentionFileBefore, data: fileBefore });
-  const afterObj = parse({ extentionFile: extentionFileAfter, data: fileAfter });
+const gendiffFunction = (path1, path2) => {
+  const objDataBefore = { data: fs.readFileSync(path1, 'utf8') };
+  const objDataAfter = { data: fs.readFileSync(path2, 'utf8') };
+  objDataBefore.extention = path.extname(path1).substring(1);
+  objDataAfter.extention = path.extname(path2).substring(1);
+  const beforeObj = parse(objDataBefore);
+  const afterObj = parse(objDataAfter);
   const keys = _.union(_.keys(beforeObj), _.keys(afterObj));
   const reducer = (acc, key) => {
-    if (_.has(beforeObj, key) && !_.has(afterObj, key)) return [...acc, `  - ${key}: ${beforeObj[key]}\n`];
-    if (!_.has(beforeObj, key) && _.has(afterObj, key)) return [...acc, `  + ${key}: ${afterObj[key]}\n`];
+    if (_.has(beforeObj, key) && !_.has(afterObj, key)) return [...acc, `  - ${key}: ${beforeObj[key]}`];
+    if (!_.has(beforeObj, key) && _.has(afterObj, key)) return [...acc, `  + ${key}: ${afterObj[key]}`];
     if (beforeObj[key] === afterObj[key]) {
-      return [...acc, `    ${key}: ${beforeObj[key]}\n`];
+      return [...acc, `    ${key}: ${beforeObj[key]}`];
     }
-    return [...acc, `  + ${key}: ${afterObj[key]}\n`, `  - ${key}: ${beforeObj[key]}\n`];
+    return [...acc, `  + ${key}: ${afterObj[key]}`, `  - ${key}: ${beforeObj[key]}`];
   };
-  const strDiff = `${keys.reduce(reducer, ['{\n']).join('')}}\n`;
+  const strDiff = `${keys.reduce(reducer, ['{']).join('\n')}\n}\n`;
   return strDiff;
 };
 
