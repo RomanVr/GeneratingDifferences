@@ -2,11 +2,11 @@ import yaml from 'js-yaml';
 import ini from 'ini';
 
 const mappingToParse = {
-  yml: data => yaml.safeLoad(data),
-  json: data => JSON.parse(data),
-  ini: data => ini.parse(data),
+  yml: yaml.safeLoad,
+  json: JSON.parse,
+  ini: ini.parse,
 };
 
-const parse = objData => mappingToParse[objData.extention](objData.data);
+const parse = (extenstionFile, data) => mappingToParse[extenstionFile](data);
 
 export default parse;

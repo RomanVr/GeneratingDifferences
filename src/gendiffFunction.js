@@ -4,12 +4,12 @@ import path from 'path';
 import parse from './parsers';
 
 const gendiffFunction = (path1, path2) => {
-  const objDataBefore = { data: fs.readFileSync(path1, 'utf8') };
-  const objDataAfter = { data: fs.readFileSync(path2, 'utf8') };
-  objDataBefore.extention = path.extname(path1).substring(1);
-  objDataAfter.extention = path.extname(path2).substring(1);
-  const beforeObj = parse(objDataBefore);
-  const afterObj = parse(objDataAfter);
+  const dataBefore = fs.readFileSync(path1, 'utf8');
+  const dataAfter = fs.readFileSync(path2, 'utf8');
+  const extentionFileBefore = path.extname(path1).substring(1);
+  const extentionFileAfter = path.extname(path2).substring(1);
+  const beforeObj = parse(extentionFileBefore, dataBefore);
+  const afterObj = parse(extentionFileAfter, dataAfter);
   const keys = _.union(_.keys(beforeObj), _.keys(afterObj));
   const reducer = (acc, key) => {
     if (_.has(beforeObj, key) && !_.has(afterObj, key)) return [...acc, `  - ${key}: ${beforeObj[key]}`];
