@@ -22,6 +22,9 @@ startBroken:
 start3:
 		npm run babel-node -- src/bin/gendiff.js before.ini after.ini
 
+start4:
+		npm run babel-node -- src/bin/gendiff.js --format json before.json after.json
+
 lint:
 		npm run eslint .
 

@@ -8,47 +8,47 @@ const getAstDiff = (beforeObj, afterObj) => {
       // Ключ только у beforeObj
       if (_.has(bObj, key) && !_.has(aObj, key)) {
         if (_.isPlainObject(bObj[key])) {
-          const newItemObj = { name: key, sign: 'deleted', data: iter(bObj[key], {}, []) };
-          return [...acc, newItemObj];
+          const property = { nameProperty: key, statusProperty: 'deleted', dataProperty: iter(bObj[key], {}, []) };
+          return [...acc, property];
         }
-        const newItemObj = { name: key, sign: _.keys(aObj).length !== 0 ? 'deleted' : 'unchanged', data: bObj[key] };
-        return [...acc, newItemObj];
+        const property = { nameProperty: key, statusProperty: _.keys(aObj).length !== 0 ? 'deleted' : 'unchanged', dataProperty: bObj[key] };
+        return [...acc, property];
       }
       // Ключ только у afterObj
       if (!_.has(bObj, key) && _.has(aObj, key)) {
         if (_.isPlainObject(aObj[key])) {
-          const newItemObj = { name: key, sign: 'added', data: iter({}, aObj[key], []) };
-          return [...acc, newItemObj];
+          const property = { nameProperty: key, statusProperty: 'added', dataProperty: iter({}, aObj[key], []) };
+          return [...acc, property];
         }
         // console.log(`bObj !== {}: ${bObj !== {}}`);
-        const newItemObj = { name: key, sign: _.keys(bObj).length !== 0 ? 'added' : 'unchanged', data: aObj[key] };
-        return [...acc, newItemObj];
+        const property = { nameProperty: key, statusProperty: _.keys(bObj).length !== 0 ? 'added' : 'unchanged', dataProperty: aObj[key] };
+        return [...acc, property];
       }
-      // Если значение ключа типа Object
+      // Если значение ключа типа Object, одинаковые у обоих
       if (_.isPlainObject(bObj[key]) && _.isPlainObject(aObj[key])) {
-        const newItemObj = { name: key, sign: 'unchanged', data: iter(bObj[key], aObj[key], []) };
-        return [...acc, newItemObj];
+        const property = { nameProperty: key, statusProperty: 'unchanged', dataProperty: iter(bObj[key], aObj[key], []) };
+        return [...acc, property];
       }
-      // Если значение ключа типа Object только у before
+      // Если значение ключа типа Object только у before, у after тип string
       if (_.isPlainObject(bObj[key])) {
-        const newItemObjBefore = { name: key, sign: 'deleted', data: iter(bObj[key], {}, []) };
-        const newItemObjAfter = { name: key, sign: 'added', data: aObj[key] };
-        return [...acc, newItemObjBefore, newItemObjAfter];
+        const propertyBefore = { nameProperty: key, statusProperty: 'changed', dataProperty: iter(bObj[key], {}, []) };
+        const propertyAfter = { nameProperty: key, statusProperty: 'added', dataProperty: aObj[key] };
+        return [...acc, propertyBefore, propertyAfter];
       }
-      // Если значение ключа типа Object только у after
+      // Если значение ключа типа Object только у after, у before тип String
       if (_.isPlainObject(aObj[key])) {
-        const newItemObjBefore = { name: key, sign: 'deleted', data: bObj[key] };
-        const newItemObjAfter = { name: key, sign: 'added', data: iter({}, aObj[key], []) };
-        return [...acc, newItemObjBefore, newItemObjAfter];
+        const propertyBefore = { nameProperty: key, statusProperty: 'changed', dataProperty: bObj[key] };
+        const propertyAfter = { nameProperty: key, statusProperty: 'added', dataProperty: iter({}, aObj[key], []) };
+        return [...acc, propertyBefore, propertyAfter];
       }
       // Если значение ключа у всех типа string
       if (bObj[key] === aObj[key]) {
-        const newItemObj = { name: key, sign: 'unchanged', data: bObj[key] };
-        return [...acc, newItemObj];
+        const property = { nameProperty: key, statusProperty: 'unchanged', dataProperty: bObj[key] };
+        return [...acc, property];
       }
-      const newItemObjBefore = { name: key, sign: 'deleted', data: bObj[key] };
-      const newItemObjAfter = { name: key, sign: 'added', data: aObj[key] };
-      return [...acc, newItemObjAfter, newItemObjBefore];
+      const propertyBefore = { nameProperty: key, statusProperty: 'changed', dataProperty: bObj[key] };
+      const propertyAfter = { nameProperty: key, statusProperty: 'added', dataProperty: aObj[key] };
+      return [...acc, propertyAfter, propertyBefore];
     };
     return keys.reduce(reducer, astAcc);
   };
