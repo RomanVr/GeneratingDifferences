@@ -22,11 +22,13 @@ const pathToFileIni2Tree = './__tests__/__fixtures__/afterTree.ini';
 
 test('must return the differenct between files before and after', () => {
   const diff = fs.readFileSync('./__tests__/__fixtures__/diff.txt', 'utf8');
-  const dfifTree = fs.readFileSync('./__tests__/__fixtures__/diffTree.txt', 'utf8');
+  const diffTreeJson = fs.readFileSync('./__tests__/__fixtures__/diffTreeJson.txt', 'utf8');
+  const diffTreePlain = fs.readFileSync('./__tests__/__fixtures__/diffTreePlain.txt', 'utf8');
   expect(gendiff(pathToFileJson1, pathToFileJson2)).toBe(diff);
   expect(gendiff(pathToFileYaml1, pathToFileYaml2)).toBe(diff);
   expect(gendiff(pathToFileIni1, pathToFileIni2)).toBe(diff);
-  expect(gendiff(pathToFileJson1Tree, pathToFileJson2Tree)).toBe(dfifTree);
-  expect(gendiff(pathToFileYaml1Tree, pathToFileYaml2Tree)).toBe(dfifTree);
-  expect(gendiff(pathToFileIni1Tree, pathToFileIni2Tree)).toBe(dfifTree);
+  expect(gendiff(pathToFileJson1Tree, pathToFileJson2Tree)).toBe(diffTreeJson);
+  expect(gendiff(pathToFileYaml1Tree, pathToFileYaml2Tree)).toBe(diffTreeJson);
+  expect(gendiff(pathToFileIni1Tree, pathToFileIni2Tree)).toBe(diffTreeJson);
+  expect(gendiff(pathToFileJson1Tree, pathToFileJson2Tree, 'plain')).toBe(diffTreePlain);
 });

@@ -25,6 +25,12 @@ start3:
 start4:
 		npm run babel-node -- src/bin/gendiff.js --format json before.json after.json
 
+start5:
+		npm run babel-node -- src/bin/gendiff.js --format plain before.json after.json
+
+start5tree:
+		npm run babel-node -- src/bin/gendiff.js --format plain beforeTree.json afterTree.json
+
 lint:
 		npm run eslint .
 
