@@ -6,3 +6,6 @@
 
 ### Usage difference between json format simple structure
 [![asciicast](https://asciinema.org/a/SWt0fINUL0WEIZA2Pg16yLJ6H.png)](https://asciinema.org/a/SWt0fINUL0WEIZA2Pg16yLJ6H)
+
+### Usage difference between yaml format simple structure
+[![asciicast](https://asciinema.org/a/eBKDs3BofEGhCjFctSiuKAca1.png)](https://asciinema.org/a/eBKDs3BofEGhCjFctSiuKAca1)

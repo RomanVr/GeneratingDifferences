@@ -6,6 +6,10 @@ start:
 start1:
 		npm run babel-node -- src/bin/gendiff.js $(pathToTestFile)before.json $(pathToTestFile)after.json
 
+start2:
+		npm run babel-node -- src/bin/gendiff.js $(pathToTestFile)before.yml $(pathToTestFile)after.yml
+
+
 install:
 		npm install
 
