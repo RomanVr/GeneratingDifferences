@@ -9,6 +9,8 @@ start1:
 start2:
 		npm run babel-node -- src/bin/gendiff.js $(pathToTestFile)before.yml $(pathToTestFile)after.yml
 
+start3:
+		npm run babel-node -- src/bin/gendiff.js $(pathToTestFile)before.ini $(pathToTestFile)after.ini
 
 install:
 		npm install

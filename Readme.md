@@ -4,8 +4,11 @@
 ### Installation package and usage help
 [![asciicast](https://asciinema.org/a/CHaxAUDKdF68gZrCKiXU0d4i0.png)](https://asciinema.org/a/CHaxAUDKdF68gZrCKiXU0d4i0)
 
-### Usage difference between json format simple structure
+### Usage difference between files json format simple structure
 [![asciicast](https://asciinema.org/a/SWt0fINUL0WEIZA2Pg16yLJ6H.png)](https://asciinema.org/a/SWt0fINUL0WEIZA2Pg16yLJ6H)
 
-### Usage difference between yaml format simple structure
+### Usage difference between files yaml format simple structure
 [![asciicast](https://asciinema.org/a/eBKDs3BofEGhCjFctSiuKAca1.png)](https://asciinema.org/a/eBKDs3BofEGhCjFctSiuKAca1)
+
+### Usage difference between files ini format simple structure
+[![asciicast](https://asciinema.org/a/CAX4JvkEl7Tp4HIv0yB4uxn2x.png)](https://asciinema.org/a/CAX4JvkEl7Tp4HIv0yB4uxn2x)
