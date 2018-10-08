@@ -3,3 +3,6 @@
 
 ### Installation package and usage help
 [![asciicast](https://asciinema.org/a/CHaxAUDKdF68gZrCKiXU0d4i0.png)](https://asciinema.org/a/CHaxAUDKdF68gZrCKiXU0d4i0)
+
+### Usage difference between json format simple structure
+[![asciicast](https://asciinema.org/a/SWt0fINUL0WEIZA2Pg16yLJ6H.png)](https://asciinema.org/a/SWt0fINUL0WEIZA2Pg16yLJ6H)

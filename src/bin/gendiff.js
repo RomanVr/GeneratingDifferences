@@ -1,10 +1,13 @@
 #!/usr/bin/env node
 import program from 'commander';
+import gendiff from '..';
 
 program
-  .version('2.0.1')
+  .version('2.2.0')
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --format [type]', 'Output format')
-  .arguments('<firstConfig> <secondConfig>');
-
+  .arguments('<firstConfig> <secondConfig>')
+  .action((firstConfig, secondConfig) => {
+    console.log(gendiff(firstConfig, secondConfig));
+  });
 program.parse(process.argv);

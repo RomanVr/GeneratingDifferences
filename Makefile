@@ -1,5 +1,10 @@
+pathToTestFile="__tests__/__fixtures__/"
+
 start:
 		npm run babel-node -- src/bin/gendiff.js -h
+
+start1:
+		npm run babel-node -- src/bin/gendiff.js $(pathToTestFile)before.json $(pathToTestFile)after.json
 
 install:
 		npm install
