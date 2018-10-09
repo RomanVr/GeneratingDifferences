@@ -12,3 +12,6 @@
 
 ### Usage difference between files ini format simple structure
 [![asciicast](https://asciinema.org/a/CAX4JvkEl7Tp4HIv0yB4uxn2x.png)](https://asciinema.org/a/CAX4JvkEl7Tp4HIv0yB4uxn2x)
+
+### Usage difference between files json, ini, yaml format of a recusive structure
+[![asciicast](https://asciinema.org/a/wQeme5set8Pgkqzvs5XqyArsu.png)](https://asciinema.org/a/wQeme5set8Pgkqzvs5XqyArsu)

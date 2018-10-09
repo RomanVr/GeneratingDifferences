@@ -3,9 +3,9 @@ import program from 'commander';
 import gendiff from '..';
 
 program
-  .version('2.4.0')
+  .version('2.5.0')
   .description('Compares two configuration files and shows a difference.')
-  .option('-f, --format [type]', 'Output format')
+  .option('-f, --format [type]', 'Output format', 'json')
   .arguments('<firstConfig> <secondConfig>')
   .action((firstConfig, secondConfig) => {
     console.log(gendiff(firstConfig, secondConfig));
