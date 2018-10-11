@@ -18,7 +18,7 @@ start3:
 starttree:
 		npm run babel-node -- src/bin/gendiff.js $(pathToTestFile)beforeTree.json $(pathToTestFile)afterTree.json
 
-starterr:
+starterr2:
 		npm run babel-node -- src/bin/gendiff.js $(pathToTestFile)before.txt $(pathToTestFile)after.json
 
 install:
