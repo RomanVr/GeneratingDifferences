@@ -1,29 +1,25 @@
 import _ from 'lodash';
 
-const signToRender = {
-  added: '+',
-  deleted: '-',
-  unchanged: ' ',
-};
-
 const indent = ' '.repeat(4);
 
-const stringifyJson = (dataProperty, deep) => {
-  if (!_.isPlainObject(dataProperty)) return dataProperty;
-  const dataToString = _.keys(dataProperty).map(key => `${deep}${indent}  ${key}: ${dataProperty[key]}`).join('\n');
+const stringifyJson = (valueProperty, deep) => {
+  if (!_.isPlainObject(valueProperty)) return valueProperty;
+  const dataToString = _.keys(valueProperty).map(key => `${deep}${indent}  ${key}: ${valueProperty[key]}`).join('\n');
   return `{\n${dataToString}\n${deep}${indent}}`;
 };
 
-const iterJson = (astIter, deep = '') => astIter.map((node) => {
-  if (node.statusProperty === 'unchanged' && _.isArray(node.dataProperty)) {
-    return ` ${deep} ${signToRender[node.statusProperty]} ${node.nameProperty}: {\n${iterJson(node.dataProperty, `${deep}${indent}`)}\n${deep}${indent}}`;
-  }
-  if (node.statusProperty === 'changed') {
-    return ` ${deep} + ${node.nameProperty}: ${stringifyJson(node.afterProperty, deep)}\n ${deep} - ${node.nameProperty}: ${stringifyJson(node.beforeProperty, deep)}`;
-  }
-  return ` ${deep} ${signToRender[node.statusProperty]} ${node.nameProperty}: ${stringifyJson(node.dataProperty, deep)}`;
-}).join('\n');
+const iterJsonAst = (ast, deepAst) => {
+  const jsonToRenderStatus = {
+    added: (node, deep) => ` ${deep} + ${node.nameProperty}: ${stringifyJson(node.newValue, deep)}`,
+    deleted: (node, deep) => ` ${deep} - ${node.nameProperty}: ${stringifyJson(node.oldValue, deep)}`,
+    nested: (node, deep) => ` ${deep}   ${node.nameProperty}: {\n${iterJsonAst(node.children, `${deep}${indent}`)}\n${deep}${indent}}`,
+    unchanged: (node, deep) => ` ${deep}   ${node.nameProperty}: ${stringifyJson(node.value, deep)}`,
+    changed: (node, deep) => ` ${deep} + ${node.nameProperty}: ${stringifyJson(node.newValue, deep)}\n ${deep} - ${node.nameProperty}: ${stringifyJson(node.oldValue, deep)}`,
+  };
 
-const render = ast => `{\n${iterJson(ast, '')}\n}\n`;
+  return ast.map(node => jsonToRenderStatus[node.statusProperty](node, deepAst)).join('\n');
+};
+
+const render = ast => `{\n${iterJsonAst(ast, '')}\n}\n`;
 
 export default render;
