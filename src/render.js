@@ -8,9 +8,9 @@ const signToRender = {
 
 const indent = ' '.repeat(4);
 
-const stringifyJson = (data, deep) => {
-  if (!_.isPlainObject(data)) return data;
-  const dataToString = _.keys(data).map(key => `${deep}${indent}  ${key}: ${data[key]}`).join('\n');
+const stringifyJson = (dataProperty, deep) => {
+  if (!_.isPlainObject(dataProperty)) return dataProperty;
+  const dataToString = _.keys(dataProperty).map(key => `${deep}${indent}  ${key}: ${dataProperty[key]}`).join('\n');
   return `{\n${dataToString}\n${deep}${indent}}`;
 };
 
