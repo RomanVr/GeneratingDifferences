@@ -10,14 +10,14 @@ const stringifyJson = (valueProperty, deep) => {
 
 const iterJsonAst = (ast, deepAst) => {
   const jsonToRenderStatus = {
-    added: (node, deep) => ` ${deep} + ${node.nameProperty}: ${stringifyJson(node.newValue, deep)}`,
-    deleted: (node, deep) => ` ${deep} - ${node.nameProperty}: ${stringifyJson(node.oldValue, deep)}`,
-    nested: (node, deep) => ` ${deep}   ${node.nameProperty}: {\n${iterJsonAst(node.children, `${deep}${indent}`)}\n${deep}${indent}}`,
-    unchanged: (node, deep) => ` ${deep}   ${node.nameProperty}: ${stringifyJson(node.value, deep)}`,
-    changed: (node, deep) => ` ${deep} + ${node.nameProperty}: ${stringifyJson(node.newValue, deep)}\n ${deep} - ${node.nameProperty}: ${stringifyJson(node.oldValue, deep)}`,
+    added: (node, deep, acc) => [...acc, ` ${deep} + ${node.nameProperty}: ${stringifyJson(node.newValue, deep)}`],
+    deleted: (node, deep, acc) => [...acc, ` ${deep} - ${node.nameProperty}: ${stringifyJson(node.oldValue, deep)}`],
+    nested: (node, deep, acc) => [...acc, ` ${deep}   ${node.nameProperty}: {\n${iterJsonAst(node.children, `${deep}${indent}`)}\n${deep}${indent}}`],
+    unchanged: (node, deep, acc) => [...acc, ` ${deep}   ${node.nameProperty}: ${stringifyJson(node.value, deep)}`],
+    changed: (node, deep, acc) => [...acc, ` ${deep} + ${node.nameProperty}: ${stringifyJson(node.newValue, deep)}`, ` ${deep} - ${node.nameProperty}: ${stringifyJson(node.oldValue, deep)}`],
   };
 
-  return ast.map(node => jsonToRenderStatus[node.statusProperty](node, deepAst)).join('\n');
+  return ast.reduce((acc, node) => jsonToRenderStatus[node.statusProperty](node, deepAst, acc), []).join('\n');
 };
 
 const render = ast => `{\n${iterJsonAst(ast, '')}\n}\n`;
