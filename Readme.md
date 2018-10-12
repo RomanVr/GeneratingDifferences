@@ -15,3 +15,6 @@
 
 ### Usage difference between files json, ini, yaml format of a recusive structure
 [![asciicast](https://asciinema.org/a/wQeme5set8Pgkqzvs5XqyArsu.png)](https://asciinema.org/a/wQeme5set8Pgkqzvs5XqyArsu)
+
+### Usage difference between files json, ini, yaml format of a recusive structure and presentation in plain-text format
+[![asciicast](https://asciinema.org/a/1CtCw874MboAhcFHvo8Rq36J2.png)](https://asciinema.org/a/1CtCw874MboAhcFHvo8Rq36J2)

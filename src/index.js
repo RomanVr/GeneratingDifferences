@@ -1,10 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 import getAstdiff from './getAstDiff';
-import render from './render';
+import render from './renderers';
 import parse from './parsers';
 
-const gendiffProperties = (path1, path2) => {
+const gendiffProperties = (path1, path2, typeOutput = 'json') => {
   const dataBefore = fs.readFileSync(path1, 'utf8');
   const dataAfter = fs.readFileSync(path2, 'utf8');
   const typeDataBefore = path.extname(path1).substring(1);
@@ -12,7 +12,7 @@ const gendiffProperties = (path1, path2) => {
   const beforeObj = parse(typeDataBefore, dataBefore);
   const afterObj = parse(typeDataAfter, dataAfter);
   const astDiff = getAstdiff(beforeObj, afterObj);
-  return render(astDiff);
+  return render(astDiff, typeOutput);
 };
 
 export default gendiffProperties;
