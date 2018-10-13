@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import getAstdiff from './getAstDiff';
-import render from './renderers/renderers';
+import render from './renderers';
 import parse from './parsers';
 
 const gendiffProperties = (path1, path2, typeOutput = 'json') => {
