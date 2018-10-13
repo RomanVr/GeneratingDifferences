@@ -1,17 +1,17 @@
 import _ from 'lodash';
 
-const stringifyPlain = (data) => {
-  if (_.isPlainObject(data)) return '[complex value]';
-  if (typeof data === 'string') return `'${data}'`;
-  return data;
+const stringify = (nodeValue) => {
+  if (_.isPlainObject(nodeValue)) return '[complex value]';
+  if (typeof nodeValue === 'string') return `'${nodeValue}'`;
+  return nodeValue;
 };
 
 const iterPlain = (astIter, nameParentAst) => {
   const plainToRenderType = {
-    added: (node, nameParent) => `'${nameParent}${node.nameProperty} was added wish value: ${stringifyPlain(node.newValue)}`,
+    added: (node, nameParent) => `'${nameParent}${node.nameProperty} was added wish value: ${stringify(node.newValue)}`,
     deleted: (node, nameParent) => `'${nameParent}${node.nameProperty}' was removed`,
     nested: (node, nameParent) => iterPlain(node.children, `${nameParent}${node.nameProperty}.`),
-    changed: (node, nameParent) => `'${nameParent}${node.nameProperty}' was updated. From ${stringifyPlain(node.oldValue)} to ${stringifyPlain(node.newValue)}`,
+    changed: (node, nameParent) => `'${nameParent}${node.nameProperty}' was updated. From ${stringify(node.oldValue)} to ${stringify(node.newValue)}`,
     unchanged: () => 'not changed',
   };
   return astIter.map(node => plainToRenderType[node.typeProperty](node, nameParentAst));
