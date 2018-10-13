@@ -1,11 +1,18 @@
-import jsonRender from './jsonRender';
+import _ from 'lodash';
+import prettyRender from './prettyRender';
 import plainTextRender from './plainTextRender';
 
 const mappingToRender = {
-  json: jsonRender,
+  pretty: prettyRender,
   plain: plainTextRender,
+  json: JSON.stringify,
 };
 
-const renderers = (ast, typeRender) => mappingToRender[typeRender](ast);
+const renderers = (ast, typeRender) => {
+  if (!_.has(mappingToRender, typeRender)) {
+    throw new Error(`not possible to presentatio in formate ${typeRender}`);
+  }
+  return mappingToRender[typeRender](ast);
+};
 
 export default renderers;
