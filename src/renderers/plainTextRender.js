@@ -12,13 +12,13 @@ const iterPlain = (astIter, nameParentAst) => {
     deleted: (node, nameParent) => `'${nameParent}${node.nameProperty}' was removed`,
     nested: (node, nameParent) => iterPlain(node.children, `${nameParent}${node.nameProperty}.`),
     changed: (node, nameParent) => `'${nameParent}${node.nameProperty}' was updated. From ${stringify(node.oldValue)} to ${stringify(node.newValue)}`,
-    unchanged: () => 'not changed',
+    unchanged: () => null,
   };
   return astIter.map(node => plainToRenderType[node.typeProperty](node, nameParentAst));
 };
 
 const plainTextRender = ast => `${_.flattenDeep(iterPlain(ast, ''))
-  .filter(propertyPlain => propertyPlain !== 'not changed')
+  .filter(propertyPlain => propertyPlain)
   .map(propertyPlain => `Property ${propertyPlain}`)
   .join('\n')}\n`;
 

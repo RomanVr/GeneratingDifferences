@@ -11,7 +11,7 @@ const getAstDiff = (beforeObj, afterObj) => {
     }
     if (_.isPlainObject(beforeObj[key]) && _.isPlainObject(afterObj[key])) {
       return [...acc, {
-        nameProperty: key, typeProperty: 'nested', children: getAstDiff(beforeObj[key], afterObj[key], []),
+        nameProperty: key, typeProperty: 'nested', children: getAstDiff(beforeObj[key], afterObj[key]),
       }];
     }
     if (beforeObj[key] === afterObj[key]) {
